@@ -1,6 +1,10 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import CurrentWeather from "./CurrentWeather"
+import Header from "./Header"
+import HourlyForecast from "./HourlyForecast"
+import InputField from "./InputField"
 
 // -----------------------------------------------------------------------------
 // Constants
@@ -26,10 +30,6 @@ const buildSevenDayUrl = (lat, lon) => {
 
 const Layout = styled.div``
 
-const FormInput = styled.input`
-  height: 24px;
-`
-
 // -----------------------------------------------------------------------------
 // Component
 // -----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ const Dashboard = () => {
     setIsLoading(true)
     axios.get(geocodingUrl).then((response) => {
       const { data } = response
-      console.log(data)
+
       if (data.length === 0) {
         setIsError(true)
         setIsLoading(false)
@@ -57,23 +57,27 @@ const Dashboard = () => {
 
       const sevenDayUrl = buildSevenDayUrl(lat, lon)
 
-      axios.get(sevenDayUrl).then((response) => {
-        const { data } = response
-
-        setWeatherData({
-          cityName: search,
-          temperature: data.current.temp,
-          description: data.current.weather[0].main,
+      axios
+        .get(sevenDayUrl)
+        .then((response) => {
+          const { current, daily, hourly } = response.data
+          console.log(data)
+          setWeatherData({
+            cityName: search,
+            temperature: current.temp,
+            description: current.weather[0].main,
+            daily: daily,
+            hourly: hourly,
+          })
         })
-        setIsLoading(false)
-      })
+        .then(setIsLoading(false))
     })
   }, [search])
 
   return (
     <Layout>
-      <FormInput
-        type="text"
+      <Header />
+      <InputField
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         onKeyUp={(event) => {
@@ -81,7 +85,6 @@ const Dashboard = () => {
             setSearch(query)
           }
         }}
-        placeholder="Please enter a location"
       />
 
       {isError && <div>Invalid city, please try again.</div>}
@@ -89,11 +92,10 @@ const Dashboard = () => {
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <React.Fragment>
-          <h1>{weatherData.cityName}</h1>
-          <p>{weatherData.temperature} Celsius</p>
-          <p>{weatherData.description}</p>
-        </React.Fragment>
+        <div>
+          <CurrentWeather weatherData={weatherData} />
+          <HourlyForecast hourlyForecast={weatherData.hourly} />
+        </div>
       )}
     </Layout>
   )
