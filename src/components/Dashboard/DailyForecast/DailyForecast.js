@@ -19,15 +19,18 @@ const Layout = styled.div`
     align-items: center;
   }
 `
-
-const HourlyItem = ({ hour }) => {
-  const dateInstance = new Date(hour.dt * 1000)
-  const formattedTime = dateInstance.getHours()
+const DailyItem = ({ day }) => {
+  const dateInstance = new Date(day.dt * 1000)
+  const formattedDate = dateInstance.getDate()
+  const formattedMonth = "Feb"
 
   return (
     <li>
-      <p>{formattedTime}:00</p>
-      <p>{hour.temp}°</p>
+      <p>
+        {formattedDate}
+        {formattedMonth}
+      </p>
+      <p>{day.temp.day}°</p>
     </li>
   )
 }
@@ -36,24 +39,24 @@ const HourlyItem = ({ hour }) => {
 // Component
 // -----------------------------------------------------------------------------
 // Check the API fetching!
-const HourlyForecast = ({ hourlyForecast }) => {
-  const hourlyItems = hourlyForecast
+const DailyForecast = ({ dailyForecast }) => {
+  const dailyItems = dailyForecast
     .slice(0, 10)
-    .map((hour) => <HourlyItem key={hour.dt} hour={hour} />)
+    .map((day) => <DailyItem key={day.dt} day={day} />)
 
   return (
     <Layout>
-      <ul>{hourlyItems}</ul>
+      <ul>{dailyItems}</ul>
     </Layout>
   )
 }
 
-HourlyForecast.defaultProps = {
-  hourlyForecast: [],
+DailyForecast.defaultProps = {
+  dailyForecast: [],
 }
 
-HourlyForecast.propTypes = {
-  hourlyForecast: PropTypes.array,
+DailyForecast.propTypes = {
+  dailyForecast: PropTypes.array,
 }
 
-export default HourlyForecast
+export default DailyForecast

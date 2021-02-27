@@ -7,7 +7,9 @@ import styled from "styled-components"
 // -----------------------------------------------------------------------------
 
 const Layout = styled.div`
-  height: 50px;
+  height: 70%;
+  flex-grow: 1;
+  margin: 0 32px;
 `
 
 const FormInput = styled.input`
@@ -15,19 +17,21 @@ const FormInput = styled.input`
   height: 100%;
   border: none;
   border-radius: 4px;
-  background-color: rgb(50, 61, 105);
+  background-color: white;
   padding-left: 12px;
-  font-size: 16px;
-  color: white;
+  font-size: 24px;
+  color: black;
   &:hover {
-    background-color: white;
+    background-color: lightgray;
     color: black;
+    font-size: 24px;
     &::placeholder {
-      color: black;
+      color: gray;
+      font-size: 16px;
     }
   }
   &::placeholder {
-    color: white;
+    color: gray;
     font-size: 16px;
   }
 `
@@ -41,7 +45,7 @@ const InputField = ({ onChange, onKeyUp, value }) => {
     <Layout>
       <FormInput
         type="text"
-        placeholder="Please enter a location"
+        placeholder="Please enter a town or city"
         onChange={onChange}
         onKeyUp={onKeyUp}
         value={value}

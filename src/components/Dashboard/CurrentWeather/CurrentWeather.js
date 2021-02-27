@@ -2,11 +2,10 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const CurrentWeather = ({ weatherData }) => {
-  const { cityName, temperature, description } = weatherData
+  const { temperature, description } = weatherData
 
   return (
     <React.Fragment>
-      <h1>{cityName}</h1>
       <p>{temperature} Celsius</p>
       <p>{description}</p>
     </React.Fragment>
