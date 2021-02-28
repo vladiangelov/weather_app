@@ -28,7 +28,7 @@ const calculateMinMaxForAllDays = (days) => {
 // -----------------------------------------------------------------------------
 
 const Layout = styled.div`
-  height: 282px;
+  height: 252px;
   background-image: url(${(imageSlug) =>
     returnBackgroundImage(imageSlug.imageSlug)});
   background-size: cover;
@@ -46,7 +46,7 @@ const CityName = styled.div`
 // Component
 // -----------------------------------------------------------------------------
 
-const CurrentWeather = ({ cityName, dailyForecast }) => {
+const CurrentWeather = ({ cityName, dailyForecast, unitSystem }) => {
   const [imageSlug, setImageSlug] = useState(dailyForecast[0].weather[0].main)
   const minMaxArray = calculateMinMaxForAllDays(dailyForecast)
 
@@ -57,6 +57,7 @@ const CurrentWeather = ({ cityName, dailyForecast }) => {
         dailyForecast={dailyForecast}
         setImageSlug={setImageSlug}
         minMaxTemp={minMaxArray}
+        unitSystem={unitSystem}
       />
     </Layout>
   )

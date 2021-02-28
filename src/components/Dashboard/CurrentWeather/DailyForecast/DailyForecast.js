@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React, { useState } from "react"
 import styled from "styled-components"
+import DailyItem from "./DailyItem"
 
 // -----------------------------------------------------------------------------
 // Helpers
@@ -17,25 +18,25 @@ const returnBorderColor = (minMaxTemp, mainTemp, active) => {
   let color = ``
 
   if (mainTemp < minTemp + increment) {
-    color = `blue`
+    color = `rgb(174, 220, 216)`
   } else if (mainTemp < minTemp + increment) {
-    color = `green`
+    color = `rgb(208, 215, 62)`
   } else if (
     mainTemp > minTemp + increment &&
     mainTemp < minTemp + 2 * increment
   ) {
-    color = `yellow`
+    color = `rgb(254,219,1)`
   } else if (
     mainTemp > minTemp + 2 * increment &&
     mainTemp < minTemp + 3 * increment
   ) {
-    color = `orange`
+    color = `rgb(252,180,14)`
   } else {
-    color = `red`
+    color = `rgb(252,128,14)`
   }
 
   if (active) {
-    return `width: 200px; height: 150px;
+    return `width: 250px; height: 120px;
             border-top: 10px ${color} solid;
             border-bottom: 10px transparent solid;
 
@@ -73,38 +74,12 @@ const Layout = styled.div`
     align-items: flex-end;
   }
 `
-const DailyItem = ({ day, className, setActive, active, setImageSlug }) => {
-  const dateInstance = new Date(day.dt * 1000)
-  const formattedDate = dateInstance.getDate()
-  const formattedMonth = "Feb"
-
-  return (
-    <li
-      className={className}
-      onClick={() => {
-        setActive(day.dt)
-        setImageSlug(day.weather[0].main)
-      }}
-    >
-      <div>
-        <p>
-          {formattedDate}
-          {formattedMonth}
-        </p>
-        <p>{Number(day.temp.day.toFixed(0))}°</p>
-      </div>
-      {active && <div>{day.weather[0].main}</div>}
-    </li>
-  )
-}
 
 const StyledDailyItem = styled(DailyItem)`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  min-height: 80px;
   flex-grow: 1;
   background-color: white;
-  padding: 6px 16px;
+  padding: 6px 10px;
   cursor: pointer;
   border-left: 1px solid lightgray;
   ${({ minMaxTemp, mainTemp, active }) =>
@@ -115,9 +90,16 @@ const StyledDailyItem = styled(DailyItem)`
 // Component
 // -----------------------------------------------------------------------------
 
-const DailyForecast = ({ dailyForecast, setImageSlug, minMaxTemp }) => {
-  const [active, setActive] = useState(dailyForecast[0].dt)
-  const dailyItems = dailyForecast.slice(0, 10).map((day) => {
+const DailyForecast = ({
+  dailyForecast,
+  setImageSlug,
+  minMaxTemp,
+  unitSystem,
+}) => {
+  const todayTimestamp = dailyForecast[0].dt
+  const [active, setActive] = useState(todayTimestamp)
+
+  const dailyItems = dailyForecast.map((day) => {
     let activeDay = false
     if (day.dt === active) {
       activeDay = true
@@ -131,6 +113,7 @@ const DailyForecast = ({ dailyForecast, setImageSlug, minMaxTemp }) => {
         setImageSlug={setImageSlug}
         minMaxTemp={minMaxTemp}
         mainTemp={day.temp.day}
+        unitSystem={unitSystem}
       />
     )
   })

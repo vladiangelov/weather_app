@@ -100,7 +100,11 @@ const Dashboard = () => {
         <div>Loading ...</div>
       ) : (
         <div>
-          <CurrentWeather cityName={search} dailyForecast={weatherData.daily} />
+          <CurrentWeather
+            cityName={search}
+            dailyForecast={weatherData.daily}
+            unitSystem={unitSystem}
+          />
           <HourlyForecast hourlyForecast={weatherData.hourly} />
           <GlobalStatistics global={weatherData.current} />
         </div>

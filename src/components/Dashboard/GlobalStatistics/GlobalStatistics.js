@@ -26,22 +26,23 @@ const setUvColor = (uvIndex) => {
 // -----------------------------------------------------------------------------
 
 const Layout = styled.div`
-  padding: 12px 0;
   background-color: white;
   color: black;
   height: 150px;
 `
 
 const InnerContainer = styled.div`
+  padding: 24px;
   height: 60px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   max-width: 1024px;
   margin: 0 auto;
 `
 
 const UvIndexTriangle = styled.div`
+  margin-top: 6px;
   position: relative;
   width: 0;
   height: 0;
@@ -51,7 +52,7 @@ const UvIndexTriangle = styled.div`
 `
 const UvIndex = styled.div`
   position: absolute;
-  top: 22px;
+  top: 23px;
   left: -10px;
 `
 
@@ -64,9 +65,9 @@ const GlobalStatistics = ({ global }) => {
     <Layout>
       <InnerContainer>
         <div>
-          <div>UV Index: </div>
+          <div>UV Index</div>
           <UvIndexTriangle uvIndex={global.uvi}>
-            <UvIndex>{global.uvi}</UvIndex>
+            <UvIndex>{global.uvi.toFixed(0)}</UvIndex>
           </UvIndexTriangle>
         </div>
         <div>
