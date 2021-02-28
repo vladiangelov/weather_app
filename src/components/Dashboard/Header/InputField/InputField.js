@@ -7,14 +7,14 @@ import styled from "styled-components"
 // -----------------------------------------------------------------------------
 
 const Layout = styled.div`
-  height: 70%;
+  height: 65%;
   flex-grow: 1;
   margin: 0 32px;
 `
 
 const FormInput = styled.input`
   width: 100%;
-  height: 100%;
+  height: 95%;
   border: none;
   border-radius: 4px;
   background-color: white;

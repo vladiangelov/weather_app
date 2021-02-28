@@ -12,11 +12,11 @@ export default {
     pressure: 1042,
     humidity: 66,
     dew_point: 2.65,
-    uvi: 1.6,
+    uvi: 9.6,
     clouds: 0,
     visibility: 10000,
     wind_speed: 0.51,
-    wind_deg: 0,
+    wind_deg: 120,
     weather: [
       {
         id: 800,
@@ -1090,7 +1090,7 @@ export default {
       sunrise: 1614408600,
       sunset: 1614447406,
       temp: {
-        day: 10.18,
+        day: 15.18,
         min: 4.83,
         max: 11.9,
         night: 6.89,
@@ -1146,7 +1146,7 @@ export default {
       weather: [
         {
           id: 800,
-          main: "Clear",
+          main: "Rain",
           description: "clear sky",
           icon: "01d",
         },
@@ -1181,7 +1181,7 @@ export default {
       weather: [
         {
           id: 800,
-          main: "Clear",
+          main: "Clouds",
           description: "clear sky",
           icon: "01d",
         },

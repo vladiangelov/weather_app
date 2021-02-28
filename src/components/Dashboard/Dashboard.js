@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import CurrentWeather from "./CurrentWeather"
-import DailyForecast from "./DailyForecast"
+import GlobalStatistics from "./GlobalStatistics"
 import Header from "./Header"
 import HourlyForecast from "./HourlyForecast"
 import weatherData from "./mockWeatherData"
@@ -100,10 +100,9 @@ const Dashboard = () => {
         <div>Loading ...</div>
       ) : (
         <div>
-          <h1>{search}</h1>
-          <CurrentWeather weatherData={weatherData} />
-          <DailyForecast dailyForecast={weatherData.daily} />
+          <CurrentWeather cityName={search} dailyForecast={weatherData.daily} />
           <HourlyForecast hourlyForecast={weatherData.hourly} />
+          <GlobalStatistics global={weatherData.current} />
         </div>
       )}
     </Layout>

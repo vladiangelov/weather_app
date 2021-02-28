@@ -11,9 +11,9 @@ import InputField from "./InputField"
 // -----------------------------------------------------------------------------
 const setUnitsCopy = (unitSystem) => {
   if (unitSystem === `metric`) {
-    return `Switch to Fahrenheit`
+    return `Celsius`
   } else {
-    return `Switch to Celsius`
+    return `Fahrenheit`
   }
 }
 // -----------------------------------------------------------------------------
@@ -25,6 +25,8 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1024px;
+  margin: 0 auto;
 `
 
 const Logo = styled.p`
@@ -33,8 +35,16 @@ const Logo = styled.p`
 `
 
 const UnitSystemButton = styled.button`
-  height: 50%;
+  height: 65%;
   flex-grow: 0;
+  width: 90px;
+  background-color: white;
+  border-radius: 4px;
+  border: 0px;
+  font-size: 16px;
+  &:hover {
+    background-color: lightgray;
+  }
 `
 
 // -----------------------------------------------------------------------------
@@ -45,7 +55,7 @@ const Header = ({ unitSystem, setUnitSystem, query, setQuery, setSearch }) => {
   const buttonText = setUnitsCopy(unitSystem)
   return (
     <Layout>
-      <Logo>The Weather App</Logo>
+      <Logo>CS50 Weather App</Logo>
 
       <InputField
         value={query}
@@ -58,9 +68,9 @@ const Header = ({ unitSystem, setUnitSystem, query, setQuery, setSearch }) => {
       />
 
       <UnitSystemButton
-        onClick={() =>
+        onClick={() => {
           setUnitSystem(unitSystem === `metric` ? `imperial` : `metric`)
-        }
+        }}
       >
         {buttonText}
       </UnitSystemButton>
