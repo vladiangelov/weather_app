@@ -1,68 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# CS50 Weather App
 
-## Available Scripts
+### Video Demo: <URL HERE>
 
-In the project directory, you can run:
+### Description
 
-### `yarn start`
+1. This is a weather forecast application, built entirely using JavaScript's most popular front-end library - React. It has been bootstrapped using the creat-react-app package and is built on top of this. React was chosen as the preferred JS library for an interactive web application, which reduces the development time and provides a big library of additional components, if needed. Consideration to use external state management tool (i.e. Redux) was done, but not used, due to the size of the application.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Data is fetched in real time from the [Open Weather Map API](https://openweathermap.org/api/) - two separate endpoints are used - first one to determine the geolocation of the city/town name that is entered (i.e. London) and second one is using this geolocation (in lattitude and longitude) to fetch the weather data. An API key is needed to use the application, which can be obtained for free from Open Weather Map API. The normal practice is not to save the key within the project (as it gets publically exposed via github), but in a .env file which is added to .gitignore and not tracked.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+3. For styling purposes, a commonly used package, named **styled-components** was used, in order to ensure no class name conflicts and better architecture of components.
 
-### `yarn test`
+4. The project consists of 2 entry files (index.js and App.js) and 3 main directories:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   - content: where all of the static content is saved - in this case this consists only of images.
+   - helpers: any shared helper JS code, which can be used in multiple components.
+   - components: the main folder, containing nested React components, starting with the Dashboard component, which also does the data fetching and passes it down through props.
 
-### `yarn build`
+5. The components are situated in a nested folder structure, which roughly represents a hierarcical tree of the DOM.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+6. The newest (at the time of creation) version of React was used for this project, which had React Hooks, therefore the components are entirely functional (as class components are slowly becoming obsolete) and hooks are used for managing state and lifecycle.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+7. In addition to that PropTypes have been used to ensure passing of the correct types of props to all components. Further work can be done to split the components and make sure every component has a single responsibility, but as it is a small project, this would be the final state for now.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Enjoy!
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+P.S. The original autogenerated README.md was saved under REACT_HELP.md, so that information about web server start, etc is available.
