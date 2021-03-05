@@ -5,6 +5,7 @@ import GlobalStatistics from "./GlobalStatistics"
 import Header from "./Header"
 import HourlyForecast from "./HourlyForecast"
 import weatherData from "./mockWeatherData"
+import Spinner from "./Spinner"
 
 // -----------------------------------------------------------------------------
 // Constants
@@ -29,13 +30,17 @@ const buildSevenDayUrl = (lat, lon, unitSystem) => {
 // -----------------------------------------------------------------------------
 
 const Layout = styled.div``
+
 const NotificationPopUp = styled.div`
-  background-color: pink;
+  background-color: white;
   color: red;
-  width: 100%;
   height: 50px;
-  display: flex;
-  align-items: center;
+  div {
+    width: 400px;
+    padding-top: 10px;
+    font-size: 24px;
+    margin: 0 auto;
+  }
 `
 
 // -----------------------------------------------------------------------------
@@ -72,13 +77,15 @@ const Dashboard = () => {
 
   //         setWeatherData({
   //           cityName: search,
-  //           temperature: current.temp,
-  //           description: current.weather[0].main,
+  //           current: current,
   //           daily: daily,
   //           hourly: hourly,
   //         })
   //       })
-  //       .then(setIsLoading(false))
+  //       .then(() => {
+  //            setError(false)
+  //            setIsLoading(false)
+  //          })
   //   })
   // }, [search, unitSystem])
 
@@ -93,11 +100,13 @@ const Dashboard = () => {
       />
 
       {isError && (
-        <NotificationPopUp>Invalid city, please try again.</NotificationPopUp>
+        <NotificationPopUp>
+          <div>Invalid city, please try again.</div>
+        </NotificationPopUp>
       )}
 
       {isLoading ? (
-        <div>Loading ...</div>
+        <Spinner>Loading...</Spinner>
       ) : (
         <div>
           <CurrentWeather
@@ -105,7 +114,10 @@ const Dashboard = () => {
             dailyForecast={weatherData.daily}
             unitSystem={unitSystem}
           />
-          <HourlyForecast hourlyForecast={weatherData.hourly} />
+          <HourlyForecast
+            hourlyForecast={weatherData.hourly}
+            unitSystem={unitSystem}
+          />
           <GlobalStatistics global={weatherData.current} />
         </div>
       )}

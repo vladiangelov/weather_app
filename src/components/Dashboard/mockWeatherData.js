@@ -12,7 +12,7 @@ export default {
     pressure: 1042,
     humidity: 66,
     dew_point: 2.65,
-    uvi: 9.6,
+    uvi: 0,
     clouds: 0,
     visibility: 10000,
     wind_speed: 0.51,
@@ -37,7 +37,7 @@ export default {
       uvi: 1.16,
       clouds: 0,
       visibility: 10000,
-      wind_speed: 1.41,
+      wind_speed: 10.41,
       wind_deg: 48,
       weather: [
         {

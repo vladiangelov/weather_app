@@ -16,6 +16,8 @@ const returnBackgroundImage = (imageSlug) => {
     return clouds_sun
   } else if (imageSlug === `Rain`) {
     return rain
+  } else {
+    return sunny
   }
 }
 
@@ -71,6 +73,7 @@ CurrentWeather.defaultProps = {
 CurrentWeather.propTypes = {
   weatherData: PropTypes.object,
   dailyForecast: PropTypes.arrayOf(Object),
+  unitSystem: PropTypes.string.isRequired,
 }
 
 export default CurrentWeather

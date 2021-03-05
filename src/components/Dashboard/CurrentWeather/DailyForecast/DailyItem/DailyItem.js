@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 import tempFormatCelsius from "../../../../../helpers/tempFormatCelsius"
@@ -7,7 +8,7 @@ import tempFormatFahrenheit from "../../../../../helpers/tempFormatFahrenheit"
 // Const
 // -----------------------------------------------------------------------------
 
-const MONTHS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 // -----------------------------------------------------------------------------
 // Helpers
@@ -16,7 +17,7 @@ const MONTHS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 const formattedDate = (dt) => {
   const dateInstance = new Date(dt * 1000)
   const formattedDate = dateInstance.getDate()
-  const formattedMonth = MONTHS[dateInstance.getDay()]
+  const formattedMonth = DAYS[dateInstance.getDay()]
   return `${formattedMonth} ${formattedDate} `
 }
 
@@ -25,7 +26,6 @@ const capitalised = (string) => {
 }
 
 const buildIconUrl = (icon) => {
-  console.log(`icon`, icon)
   return `http://openweathermap.org/img/wn/${icon}.png`
 }
 
@@ -100,6 +100,10 @@ const DailyItem = ({
       </IconAndTemperature>
     </li>
   )
+}
+
+DailyItem.propTypes = {
+  day: PropTypes.object.isRequired,
 }
 
 export default DailyItem

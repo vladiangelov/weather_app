@@ -1,5 +1,8 @@
+import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
+import sunrise from "../../../content/images/sun_times/sunrise.svg"
+import sunset from "../../../content/images/sun_times/sunset.svg"
 
 // -----------------------------------------------------------------------------
 // Helpers
@@ -29,16 +32,21 @@ const Layout = styled.div`
   background-color: white;
   color: black;
   height: 150px;
+  display: flex;
+  align-items: center;
 `
 
 const InnerContainer = styled.div`
+  width: 50%;
+  box-sizing: border-box;
+  border-top: 1px solid lightgray;
   padding: 24px;
-  height: 60px;
+  height: 120px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   max-width: 1024px;
-  margin: 0 auto;
+  margin: 0px auto;
 `
 
 const UvIndexTriangle = styled.div`
@@ -53,14 +61,35 @@ const UvIndexTriangle = styled.div`
 const UvIndex = styled.div`
   position: absolute;
   top: 23px;
-  left: -10px;
+  left: -6px;
 `
 
+const Image = styled.img`
+  display: inline-block;
+  height: 40px;
+`
+const SunriseAndSunset = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+`
+
+const ImageAndTime = styled.div`
+  width: 100px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+`
 // -----------------------------------------------------------------------------
 // Component
 // -----------------------------------------------------------------------------
 
 const GlobalStatistics = ({ global }) => {
+  const dateSunrise = new Date(global.sunrise * 1000)
+  const dateSunset = new Date(global.sunset * 1000)
+  const formattedSunrise = `${dateSunrise.getHours()}:${dateSunrise.getMinutes()}`
+  const formattedSunset = `${dateSunset.getHours()}:${dateSunrise.getMinutes()}`
+
   return (
     <Layout>
       <InnerContainer>
@@ -70,12 +99,27 @@ const GlobalStatistics = ({ global }) => {
             <UvIndex>{global.uvi.toFixed(0)}</UvIndex>
           </UvIndexTriangle>
         </div>
-        <div>
-          Sunrise: {global.sunrise} Sunset: {global.sunset}
-        </div>
+        <SunriseAndSunset>
+          <ImageAndTime>
+            <Image src={sunrise} alt="Sunrise time" />
+            <strong>{formattedSunrise}</strong>
+          </ImageAndTime>
+          <ImageAndTime>
+            <Image src={sunset} alt="Sunset time" />
+            <strong>{formattedSunset}</strong>
+          </ImageAndTime>
+        </SunriseAndSunset>
       </InnerContainer>
     </Layout>
   )
+}
+
+GlobalStatistics.defaultProps = {
+  global: {},
+}
+
+GlobalStatistics.propTypes = {
+  global: PropTypes.object,
 }
 
 export default GlobalStatistics

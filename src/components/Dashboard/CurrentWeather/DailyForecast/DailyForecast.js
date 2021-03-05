@@ -13,8 +13,6 @@ const returnBorderColor = (minMaxTemp, mainTemp, active) => {
   const range = maxTemp - minTemp
   const increment = range / 4
 
-  console.log(`inc`, increment)
-
   let color = ``
 
   if (mainTemp < minTemp + increment) {
@@ -131,6 +129,9 @@ DailyForecast.defaultProps = {
 
 DailyForecast.propTypes = {
   dailyForecast: PropTypes.array,
+  setImageSlug: PropTypes.func.isRequired,
+  minMaxTemp: PropTypes.array.isRequired,
+  unitSystem: PropTypes.string.isRequired,
 }
 
 export default DailyForecast

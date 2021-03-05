@@ -3,10 +3,6 @@ import styled from "styled-components"
 import InputField from "./InputField"
 
 // -----------------------------------------------------------------------------
-// Constants
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
 // Helpers
 // -----------------------------------------------------------------------------
 const setUnitsCopy = (unitSystem) => {
@@ -42,6 +38,7 @@ const UnitSystemButton = styled.button`
   border-radius: 4px;
   border: 0px;
   font-size: 16px;
+  cursor: pointer;
   &:hover {
     background-color: lightgray;
   }
