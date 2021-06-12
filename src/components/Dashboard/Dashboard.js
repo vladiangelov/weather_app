@@ -5,6 +5,7 @@ import CurrentWeather from "./CurrentWeather"
 import GlobalStatistics from "./GlobalStatistics"
 import Header from "./Header"
 import HourlyForecast from "./HourlyForecast"
+import mockWeatherData from "./mockWeatherData"
 import Spinner from "./Spinner"
 
 // -----------------------------------------------------------------------------
@@ -12,6 +13,7 @@ import Spinner from "./Spinner"
 // -----------------------------------------------------------------------------
 
 const API_KEY = process.env.REACT_APP_API_KEY
+const DEVELOP_WITH_MOCK_DATA = false
 
 // -----------------------------------------------------------------------------
 // Helpers
@@ -56,37 +58,49 @@ const Dashboard = () => {
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
-    const geocodingUrl = buildGeocodingUrl(search, unitSystem)
-    console.log(`Loading Data Once.......`)
-    setIsLoading(true)
-    axios.get(geocodingUrl).then((response) => {
-      const { data } = response
+    console.log(`env`, DEVELOP_WITH_MOCK_DATA)
+    if (DEVELOP_WITH_MOCK_DATA) {
+      const { current, daily, hourly } = mockWeatherData
+      setWeatherData({
+        cityName: search,
+        current: current,
+        daily: daily,
+        hourly: hourly,
+      })
+      setIsLoading(false)
+    } else {
+      const geocodingUrl = buildGeocodingUrl(search, unitSystem)
+      console.log(`Loading Geo Data Once.......`)
+      setIsLoading(true)
+      axios.get(geocodingUrl).then((response) => {
+        const { data } = response
 
-      if (data.length === 0) {
-        setIsError(true)
-        setIsLoading(false)
-        return 0
-      }
-      const { lat, lon } = data[0]
-
-      const sevenDayUrl = buildSevenDayUrl(lat, lon, unitSystem)
-      return axios
-        .get(sevenDayUrl)
-        .then((response) => {
-          const { current, daily, hourly } = response.data
-
-          setWeatherData({
-            cityName: search,
-            current: current,
-            daily: daily,
-            hourly: hourly,
-          })
-        })
-        .then(() => {
-          setIsError(false)
+        if (data.length === 0) {
+          setIsError(true)
           setIsLoading(false)
-        })
-    })
+          return 0
+        }
+        const { lat, lon } = data[0]
+        console.log(`Loading Weather Data Once.......`)
+        const sevenDayUrl = buildSevenDayUrl(lat, lon, unitSystem)
+        return axios
+          .get(sevenDayUrl)
+          .then((response) => {
+            const { current, daily, hourly } = response.data
+
+            setWeatherData({
+              cityName: search,
+              current: current,
+              daily: daily,
+              hourly: hourly,
+            })
+          })
+          .then(() => {
+            setIsError(false)
+            setIsLoading(false)
+          })
+      })
+    }
   }, [search, unitSystem])
 
   return (
