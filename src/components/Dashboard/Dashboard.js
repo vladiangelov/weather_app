@@ -20,7 +20,7 @@ const DEVELOP_WITH_MOCK_DATA = false
 // -----------------------------------------------------------------------------
 
 const buildGeocodingUrl = (search) => {
-  return `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`
+  return `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`
 }
 
 const buildSevenDayUrl = (lat, lon, unitSystem) => {
