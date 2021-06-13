@@ -52,7 +52,7 @@ const Header = ({ unitSystem, setUnitSystem, query, setQuery, setSearch }) => {
   const buttonText = setUnitsCopy(unitSystem)
   return (
     <Layout>
-      <Logo>CS50 Weather App</Logo>
+      <Logo>My Weather App</Logo>
 
       <InputField
         value={query}
