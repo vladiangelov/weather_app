@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+
+# Exclude cypress example tests
+/cypress/integration/1-getting-started
+/cypress/integration/2-advanced-examples
